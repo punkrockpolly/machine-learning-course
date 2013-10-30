@@ -17,11 +17,19 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
-% sets delta as a vector of values, summed for each hypothesis theta
-delta = (1 / m) * sum(((X * theta) - y) * X)
+theta_zero = theta(1);
+theta_one = theta(2);
+
+% use X and theta to evaluate hypothesis on all m examples
+predictions = X * theta;
 
 % simultaneous update for the vector theta
-theta = theta - alpha * delta
+theta_zero = theta_zero - alpha * (1/m) * sum(predictions - y);
+theta_one = theta_one - alpha * (1/m) * sum((predictions - y) .* X(:,2));
+
+% assign new theta values to theta
+theta(1) = theta_zero;
+theta(2) = theta_one;
 
 
     % ============================================================
@@ -29,8 +37,10 @@ theta = theta - alpha * delta
     % Save the cost J in every iteration    
     J_history(iter) = computeCost(X, y, theta);
 
-    plot(iter, J_history);
+    %plot(iter, J_history);
 
 end
 
 end
+
+%plot(iter, J_history);

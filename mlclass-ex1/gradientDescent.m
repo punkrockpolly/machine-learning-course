@@ -17,21 +17,19 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
-% simultaneous update for j=0 and j=1
-J_theta_min = min(J_history(:));
+% sets delta as a vector of values, summed for each hypothesis theta
+delta = (1 / m) * sum(((X * theta) - y) * X)
 
-temp0 := theta_zero - alpha
-
-if J < 
-    min_theta = theta
-
-
+% simultaneous update for the vector theta
+theta = theta - alpha * delta
 
 
     % ============================================================
 
     % Save the cost J in every iteration    
     J_history(iter) = computeCost(X, y, theta);
+
+    plot(iter, J_history);
 
 end
 

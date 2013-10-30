@@ -17,9 +17,9 @@ J = 0;
 predictions = X * theta;
 
 % uses predictions and y to determine squared errors
-sqrErrors = (predictions - y).^2
+sqrErrors = (predictions - y).^2;
 
-J = 1/(2*m) * sum(sqrErrors)
+J = 1/(2*m) * sum(sqrErrors);
 
 
 

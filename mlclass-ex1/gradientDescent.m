@@ -17,8 +17,13 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
+% simultaneous update for j=0 and j=1
+J_theta_min = min(J_history(:));
 
+temp0 := theta_zero - alpha
 
+if J < 
+    min_theta = theta
 
 
 

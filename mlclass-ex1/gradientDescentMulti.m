@@ -17,13 +17,15 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
 
+    % evaluate hypothesis vector for all m examples
+    hypothesis = X * theta;
 
+    % calculate delta vector for all hypothesis, y and alpha
+    % delta = (1/m) * (X' * (hypothesis - y));
+    delta = (1/m) * sum((hypothesis - y) .* X(:,2));
 
-
-
-
-
-
+    % simultaneous update for the vector theta
+    theta = theta - (alpha * delta);
 
 
 

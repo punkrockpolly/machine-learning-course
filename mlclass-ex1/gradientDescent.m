@@ -17,19 +17,20 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
-theta_zero = theta(1);
-theta_one = theta(2);
 
-% use X and theta to evaluate hypothesis on all m examples
-predictions = X * theta;
+    theta_zero = theta(1);
+    theta_one = theta(2);
 
-% simultaneous update for the vector theta
-theta_zero = theta_zero - alpha * (1/m) * sum(predictions - y);
-theta_one = theta_one - alpha * (1/m) * sum((predictions - y) .* X(:,2));
+    % use X and theta to evaluate hypothesis on all m examples
+    predictions = X * theta;
 
-% assign new theta values to theta
-theta(1) = theta_zero;
-theta(2) = theta_one;
+    % simultaneous update for the vector theta
+    theta_zero = theta_zero - alpha * (1/m) * sum(predictions - y);
+    theta_one = theta_one - alpha * (1/m) * sum((predictions - y) .* X(:,2));
+
+    % assign new theta values to theta
+    theta(1) = theta_zero;
+    theta(2) = theta_one;
 
 
     % ============================================================

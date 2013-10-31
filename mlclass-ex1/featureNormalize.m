@@ -31,14 +31,9 @@ for iter = 1:num_features
 	mu(iter) = mean(X(:, iter));
 	X_norm(:, iter) = X(:, iter) - mu(iter);
 	sigma(iter) = std(X(:, iter));
-	X_norm(:, iter) = X(:, iter) / sigma(iter);
+	X_norm(:, iter) = X_norm(:, iter) / sigma(iter);
 
 end
-	
-X_norm
-%X_norm = X - mu	
-%X_norm = X / sigma
-
 
 
 % ============================================================

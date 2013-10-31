@@ -13,7 +13,13 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
+% use X and theta to evaluate hypothesis on all m examples
+predictions = X * theta;
 
+% uses predictions and y to determine squared errors
+sqrErrors = (predictions - y).^2;
+
+J = 1/(2*m) * sum(sqrErrors);
 
 
 

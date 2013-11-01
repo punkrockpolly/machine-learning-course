@@ -21,12 +21,14 @@ for iter = 1:num_iters
     hypothesis = X * theta;
 
     % calculate delta vector for all hypothesis, y and alpha
-    % delta = (1/m) * (X' * (hypothesis - y));
-    delta = (1/m) * sum((hypothesis - y) .* X(:,2));
+    delta1 = (1/m) * (X' * (hypothesis - y));
+
+    % correct answer, but with warning: automatic broadcasting operation applied
+    %delta2 = (1/m) * sum((hypothesis - y) .* X);
+    %delta2 = delta2';
 
     % simultaneous update for the vector theta
-    theta = theta - (alpha * delta);
-
+    theta = theta - (alpha * delta1);
 
 
     % ============================================================

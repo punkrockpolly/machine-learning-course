@@ -20,10 +20,14 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+% hypothesis using the sigmoid function to predict whether h-theta(x) is >1 or < 0
+hypothesis = sigmoid(X * theta);
 
+% cost function for all training data using the hypothesis
+J = (-1/m) * sum(y .* log(hypothesis) + (1 - y) .* log(1 - hypothesis));
 
-
-
+% gradient decent to minimize theta-J(theta)
+grad = (1/m) * (X' * (hypothesis - y));
 
 
 

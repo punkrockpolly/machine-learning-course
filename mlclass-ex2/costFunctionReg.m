@@ -28,9 +28,12 @@ reg3 = reg1 - reg2;
 % cost function for all training data using the hypothesis
 J = (-1/m) * sum(y .* log(hypothesis) + (1 - y) .* log(1 - hypothesis)) + reg3;
 
+% regularization term for the gradient descent
+reg4 = (lambda/m) .* theta;
+reg4(1) = 0;
 
 % gradient decent to minimize theta-J(theta)
-grad = (1/m) * (X' * (hypothesis - y));
+grad = (1/m) * (X' * (hypothesis - y)) + reg4;
 
 
 

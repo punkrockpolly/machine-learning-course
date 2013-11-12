@@ -17,7 +17,20 @@ grad = zeros(size(theta));
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
 
+% hypothesis using the sigmoid function to predict whether h-theta(x) is >1 or < 0
+hypothesis = sigmoid(X * theta);
 
+% regularization term for hypothesis
+reg1 = lambda/(2*m) * sum(theta .^2);
+reg2 = lambda/(2*m) * (theta(1) .^2);
+reg3 = reg1 - reg2;
+
+% cost function for all training data using the hypothesis
+J = (-1/m) * sum(y .* log(hypothesis) + (1 - y) .* log(1 - hypothesis)) + reg3;
+
+
+% gradient decent to minimize theta-J(theta)
+grad = (1/m) * (X' * (hypothesis - y));
 
 
 

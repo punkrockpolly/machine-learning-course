@@ -1,0 +1,8 @@
+*.mat
+*.pdf
+*.png
+*.pptx
+*.zip
+.DS_Store
+octave-core
+docs-slides*

@@ -63,47 +63,52 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
-% Add ones to the X data matrix
+% --------------------------------------
+% Forward propagation for the hypothesis
+% --------------------------------------
+
+% Add ones to the X (A1) data matrix
 X = [ones(m, 1) X];
 
-% Forward propagation for the hypothesis
-Z = Theta1 * X';
-A2 = sigmoid(Z);
+% Hidden Layer
+Z2 = X * Theta1';
+A2 = sigmoid(Z2);
 
-n = size(A2', 1);
-A2 = [ones(n, 1) A2'];
+% Add ones to the A2 data matrix
+A2 = [ones(m, 1) A2];
 
-Z2 = Theta2 * A2';
-A3 = sigmoid(Z2);
+% Output Layer (hypothesis = A3)
+Z3 = A2 * Theta2';
+hypothesis = sigmoid(Z3);
 
-hypothesis = A3;
-h = size(hypothesis, 1)
+
+% Initialize J as zeros
+% J = zeros(num_labels,1);
 
 % regularization term for hypothesis
-% reg1 = lambda/(2*m) * sum(hypothesis .^2);
-% reg2 = lambda/(2*m) * (hypothesis(1) .^2);
-% reg3 = reg1 - reg2;
+reg1 =  sum(sum(Theta1 .^2));
+reg2 = sum(Theta1(:,1) .^2);
+reg_theta1 = reg1 - reg2;
 
+reg3 = sum(sum(Theta2 .^2));
+reg4 = sum(Theta2(:,1) .^2);
+reg_theta2 = reg3 - reg4;
+
+reg_term = lambda/(2*m) * (reg_theta1 + reg_theta2);
+
+% y(i)k : i-th row of the y column vector, 
+% converted to a 10 vector representation of the digit
+% if i-th row - y(i,:) = 5: y = [0000100000]
 
 % Cost Function
-for x=1:h;
-
-	J += sum((y .* log(hypothesis(x)) + (1 - y) .* log(1 - hypothesis(x)))); 
-
+for inum=1:m
+	y_vect = eye(num_labels)(:, y(inum,:));
+	hv = hypothesis(inum,:);
+	for k=1:num_labels;
+		J -= (y_vect(k,:) * log(hv(:,k)) + (1 - y_vect(k,:)) * log(1 - hv(:,k))); 
+	end
 end
-
-J *= (-1/m)
-
-
-
-
-
-
-
-
-
-
-
+J = J/m + reg_term;
 
 
 

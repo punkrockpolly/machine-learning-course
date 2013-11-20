@@ -63,9 +63,36 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
+% Add ones to the X data matrix
+X = [ones(m, 1) X];
+
+% Forward propagation for the hypothesis
+Z = Theta1 * X';
+A2 = sigmoid(Z);
+
+n = size(A2', 1);
+A2 = [ones(n, 1) A2'];
+
+Z2 = Theta2 * A2';
+A3 = sigmoid(Z2);
+
+hypothesis = A3;
+h = size(hypothesis, 1)
+
+% regularization term for hypothesis
+% reg1 = lambda/(2*m) * sum(hypothesis .^2);
+% reg2 = lambda/(2*m) * (hypothesis(1) .^2);
+% reg3 = reg1 - reg2;
 
 
+% Cost Function
+for x=1:h;
 
+	J += sum((y .* log(hypothesis(x)) + (1 - y) .* log(1 - hypothesis(x)))); 
+
+end
+
+J *= (-1/m)
 
 
 

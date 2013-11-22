@@ -82,10 +82,10 @@ Z3 = A2 * Theta2';
 hypothesis = sigmoid(Z3);
 
 
-% Initialize J as zeros
-% J = zeros(num_labels,1);
+% --------------------------------------
+% Regularization term for J
+% --------------------------------------
 
-% regularization term for hypothesis
 reg1 =  sum(sum(Theta1 .^2));
 reg2 = sum(Theta1(:,1) .^2);
 reg_theta1 = reg1 - reg2;
@@ -96,14 +96,19 @@ reg_theta2 = reg3 - reg4;
 
 reg_term = lambda/(2*m) * (reg_theta1 + reg_theta2);
 
+
+% --------------------------------------
+% Cost Function
+% --------------------------------------
+
 % y(i)k : i-th row of the y column vector, 
 % converted to a 10 vector representation of the digit
 % if i-th row - y(i,:) = 5: y = [0000100000]
 
-% Cost Function
 for inum=1:m
 	y_vect = eye(num_labels)(:, y(inum,:));
 	hv = hypothesis(inum,:);
+	
 	for k=1:num_labels;
 		J -= (y_vect(k,:) * log(hv(:,k)) + (1 - y_vect(k,:)) * log(1 - hv(:,k))); 
 	end
@@ -111,8 +116,14 @@ end
 
 J = J/m + reg_term;
 
+% --------------------------------------
+% Back Propogation
+% --------------------------------------
 
-% -------------------------------------------------------------
+Delta = zeros(size(X));
+for inum=1:m
+	a = X(,inum:);
+	for l=1:hidden_layer_size
 
 % =========================================================================
 

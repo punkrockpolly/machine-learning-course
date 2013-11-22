@@ -108,8 +108,8 @@ for inum=1:m
 		J -= (y_vect(k,:) * log(hv(:,k)) + (1 - y_vect(k,:)) * log(1 - hv(:,k))); 
 	end
 end
-J = J/m + reg_term;
 
+J = J/m + reg_term;
 
 
 % -------------------------------------------------------------

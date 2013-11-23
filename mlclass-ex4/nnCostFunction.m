@@ -120,10 +120,10 @@ J = J/m + reg_term;
 % Back Propogation
 % --------------------------------------
 
-Delta = zeros(size(X));
-for inum=1:m
-	a = X(,inum:);
-	for l=1:hidden_layer_size
+% Delta = zeros(size(X));
+% for t=1:m
+% 	delta = y(,t:);
+	
 
 % =========================================================================
 

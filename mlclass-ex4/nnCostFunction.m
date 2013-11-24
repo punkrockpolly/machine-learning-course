@@ -109,7 +109,7 @@ for inum=1:m
 	y_vect = eye(num_labels)(:, y(inum,:));
 	hv = hypothesis(inum,:);
 	
-	for k=1:num_labels;
+	for k=1:num_labels
 		J -= (y_vect(k,:) * log(hv(:,k)) + (1 - y_vect(k,:)) * log(1 - hv(:,k))); 
 	end
 end
@@ -120,10 +120,11 @@ J = J/m + reg_term;
 % Back Propogation
 % --------------------------------------
 
+% for each node j in layer l, compute an “error term” δ(l)j
 % Delta = zeros(size(X));
-% for t=1:m
-% 	delta = y(,t:);
-	
+for t=1:m
+	delta3 = J - y
+end	
 
 % =========================================================================
 

@@ -79,7 +79,7 @@ A2 = [ones(m, 1) A2];
 
 % Output Layer (hypothesis = A3)
 Z3 = A2 * Theta2';
-hypothesis = sigmoid(Z3);
+A3 = sigmoid(Z3);
 
 
 % --------------------------------------
@@ -107,7 +107,7 @@ reg_term = lambda/(2*m) * (reg_theta1 + reg_theta2);
 
 for inum=1:m
 	y_vect = eye(num_labels)(:, y(inum,:));
-	hv = hypothesis(inum,:);
+	hv = A3(inum,:);
 	
 	for k=1:num_labels
 		J -= (y_vect(k,:) * log(hv(:,k)) + (1 - y_vect(k,:)) * log(1 - hv(:,k))); 
@@ -121,10 +121,24 @@ J = J/m + reg_term;
 % --------------------------------------
 
 % for each node j in layer l, compute an “error term” δ(l)j
-% Delta = zeros(size(X));
+delta3 = zeros(size(A3));
+
 for t=1:m
-	delta3 = J - y
+	y_vect = eye(num_labels)(:, y(t,:))';
+	delta3(t,:) = A3(t,:) .- y_vect;
 end	
+
+delta2 = zeros(m,1);
+delta2 = delta3 * Theta2(:,2:end)  .* sigmoidGradient(Z2);
+
+size(delta3);
+size(delta2);
+
+Theta1_grad = (1/m) * (X' * delta2);
+Theta2_grad = (1/m) * (A2' * delta3);
+
+size(Theta1_grad);
+size(Theta2_grad);
 
 % =========================================================================
 

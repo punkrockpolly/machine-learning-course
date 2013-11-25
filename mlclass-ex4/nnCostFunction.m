@@ -134,8 +134,8 @@ delta2 = delta3 * Theta2(:,2:end)  .* sigmoidGradient(Z2);
 size(delta3);
 size(delta2);
 
-Theta1_grad = (1/m) * (X' * delta2);
-Theta2_grad = (1/m) * (A2' * delta3);
+Theta1_grad = ((1/m) * (X' * delta2))';
+Theta2_grad = ((1/m) * (A2' * delta3))';
 
 size(Theta1_grad);
 size(Theta2_grad);

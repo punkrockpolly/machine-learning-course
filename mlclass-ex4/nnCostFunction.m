@@ -105,16 +105,14 @@ reg_term = lambda/(2*m) * (reg_theta1 + reg_theta2);
 % converted to a 10 vector representation of the digit
 % if i-th row - y(i,:) = 5: y = [0000100000]
 
-for inum=1:m
-	y_vect = eye(num_labels)(:, y(inum,:));
-	hv = A3(inum,:);
-	
-	for k=1:num_labels
-		J -= (y_vect(k,:) * log(hv(:,k)) + (1 - y_vect(k,:)) * log(1 - hv(:,k))); 
-	end
-end
+% size(A3)
+y_matrix = zeros(size(A3'));
 
-J = J/m + reg_term;
+for inum=1:m
+	y_matrix(:,inum) = eye(num_labels)(:,y(inum,:))';
+end
+	
+J = sum(sum(-y_matrix .* log(A3') - (1 - y_matrix) .* log(1 - A3'))/m) + reg_term;
 
 % --------------------------------------
 % Back Propogation
@@ -122,23 +120,18 @@ J = J/m + reg_term;
 
 % for each node j in layer l, compute an “error term” δ(l)j
 delta3 = zeros(size(A3));
+delta3 = A3' - y_matrix;
 
-for t=1:m
-	y_vect = eye(num_labels)(:, y(t,:))';
-	delta3(t,:) = A3(t,:) .- y_vect;
-end	
+delta2 = Theta2'(2:end,:) * delta3 .* sigmoidGradient(Z2');
 
-delta2 = zeros(m,1);
-delta2 = delta3 * Theta2(:,2:end)  .* sigmoidGradient(Z2);
+% size(delta3)
+% size(delta2)
 
-size(delta3);
-size(delta2);
+Theta1_grad = (1/m) * delta2 * X;
+Theta2_grad = (1/m) * delta3 * A2;
 
-Theta1_grad = ((1/m) * (X' * delta2))';
-Theta2_grad = ((1/m) * (A2' * delta3))';
-
-size(Theta1_grad);
-size(Theta2_grad);
+% size(Theta1_grad)
+% size(Theta2_grad)
 
 % =========================================================================
 

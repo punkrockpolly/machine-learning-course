@@ -86,13 +86,13 @@ A3 = sigmoid(Z3);
 % Regularization term for J
 % --------------------------------------
 
-reg1 =  sum(sum(Theta1 .^2));
-reg2 = sum(Theta1(:,1) .^2);
-reg_theta1 = reg1 - reg2;
+reg_1a =  sum(sum(Theta1 .^2));
+reg_1b = sum(Theta1(:,1) .^2);
+reg_theta1 = reg_1a - reg_1b;
 
-reg3 = sum(sum(Theta2 .^2));
-reg4 = sum(Theta2(:,1) .^2);
-reg_theta2 = reg3 - reg4;
+reg_2a = sum(sum(Theta2 .^2));
+reg_2b = sum(Theta2(:,1) .^2);
+reg_theta2 = reg_2a - reg_2b;
 
 reg_term = lambda/(2*m) * (reg_theta1 + reg_theta2);
 
@@ -127,8 +127,18 @@ delta2 = Theta2'(2:end,:) * delta3 .* sigmoidGradient(Z2');
 % size(delta3)
 % size(delta2)
 
-Theta1_grad = (1/m) * delta2 * X;
-Theta2_grad = (1/m) * delta3 * A2;
+% --------------------------------------
+% Regularization term for Delta
+% --------------------------------------
+
+reg_1 = lambda/m * Theta1;
+reg_1(:,1) = 0;
+
+reg_2 = lambda/m * Theta2;
+reg_2(:,1) = 0;
+
+Theta1_grad = ((1/m) * delta2 * X) + reg_1;
+Theta2_grad = ((1/m) * delta3 * A2) + reg_2;
 
 % size(Theta1_grad)
 % size(Theta2_grad)

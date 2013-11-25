@@ -13,10 +13,9 @@ g = zeros(size(z));
 %               each value of z (z can be a matrix, vector or scalar).
 
 
-gz = 1.0 ./ (1.0 + exp(-z))
+gz = 1.0 ./ (1.0 + exp(-z));
 
-g = (gz .* (1.0 - gz))
-
+g = (gz .* (1.0 - gz));
 
 
 

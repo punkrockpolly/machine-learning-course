@@ -1,5 +1,6 @@
 Stanford Machine Learning 
-by Andrew Ng
+------------
+taught by Andrew Ng
 
 Syllabus
 ------------

@@ -51,9 +51,9 @@ Theta_grad = errors' * X;
 
 reg_term = lambda/2 * sum(sum(Theta .^ 2)) + lambda/2 * sum(sum(X .^ 2));
 
-J = J + reg_term;
-
-
+J += reg_term;
+X_grad += lambda .* X;
+Theta_grad += lambda .* Theta;
 
 % =============================================================
 
